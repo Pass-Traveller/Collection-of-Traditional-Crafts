@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>古语新绎 - 木活字非遗文创</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', 'SimSun', serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f1ed;
+        }
+
+        /* 导航栏 */
+        header {
+            background: linear-gradient(135deg, #8b4513 0%, #654321 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .logo-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .menu-icon {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .menu-icon span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            border-radius: 2px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s;
+            border-radius: 5px;
+        }
+
+        nav a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        /* 英雄区域 */
+        .hero {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-image {
+            background: linear-gradient(135deg, #d4a574 0%, #c19a6b 100%);
+            height: 400px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-image::after {
+            content: "活";
+            position: absolute;
+            font-size: 15rem;
+            opacity: 0.1;
+            font-weight: bold;
+        }
+
+        .hero-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .hero-content h2 {
+            font-size: 2rem;
+            color: #8b4513;
+            margin-bottom: 1rem;
+            border-left: 5px solid #d4a574;
+            padding-left: 1rem;
+        }
+
+        .hero-content p {
+            color: #666;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        /* 产品展示 */
+        .products {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #8b4513;
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #d4a574, transparent);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .product-image {
+            background: linear-gradient(135deg, #c19a6b 0%, #8b7355 100%);
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h3 {
+            color: #8b4513;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* 团队介绍 */
+        .team {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 3rem 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .team-content {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .team-label {
+            background: linear-gradient(135deg, #8b4513 0%, #654321 100%);
+            color: white;
+            padding: 2rem 1rem;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .team-description {
+            padding: 2rem;
+            background: #faf8f5;
+            border-radius: 10px;
+            border-left: 5px solid #d4a574;
+        }
+
+        .team-description p {
+            color: #666;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        /* 页脚 */
+        footer {
+            background: linear-gradient(135deg, #654321 0%, #4a3319 100%);
+            color: white;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-item::before {
+            content: "●";
+            color: #d4a574;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .team-content {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .menu-icon {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <nav>
+            <div class="logo">
+                <div class="logo-image">
+                    <!-- 在这里放置您的logo图片 -->
+                    <img src="your-logo.png" alt="古工集韵 Logo">
+                    <!-- 如果暂时没有logo，会显示下面的文字 -->
+                    <span style="font-size: 2rem; color: #8b4513;">古</span>
+                </div>
+                <span class="logo-text">古工集韵</span>
+            </div>
+            <div class="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul>
+                <li><a href="#home">首页</a></li>
+                <li><a href="#intro">非遗介绍</a></li>
+                <li><a href="#products">产品</a></li>
+                <li><a href="#team">团队介绍</a></li>
+                <li><a href="#store">前往商店 →</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section class="hero" id="home">
+        <div class="hero-image">
+            <span>木活字</span>
+        </div>
+        <div class="hero-content" id="intro">
+            <h2>非遗介绍</h2>
+            <p>
+                木活字印刷术是中国古代四大发明之一，承载着千年文化的传承与智慧。我们的"古语新绎"项目致力于将这一非物质文化遗产与现代文创产业相结合，通过深入挖掘木活字的文化内涵和艺术价值，打造独具特色的文创产品。
+            </p>
+            <p style="margin-top: 1rem;">
+                我们不仅传承传统工艺，更将其与现代设计理念融合，让古老的技艺焕发新的生命力，为消费者带来别具一格的审美体验和文化价值。
+            </p>
+        </div>
+    </section>
+
+    <!-- 产品展示 -->
+    <section class="products" id="products">
+        <h2 class="section-title">产品</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-image">📓</div>
+                <div class="product-info">
+                    <h3>木活字笔记本</h3>
+                    <p>精选优质纸张，封面采用木活字印刷工艺，每一本都独一无二。适合书写、记录，传承文化之美。</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">🎨</div>
+                <div class="product-info">
+                    <h3>文化挂饰</h3>
+                    <p>以木活字元素为设计灵感，融合传统与现代美学，可装饰居家空间，展现独特文化品味。</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">👕</div>
+                <div class="product-info">
+                    <h3>文化T恤</h3>
+                    <p>将木活字图案印制在高品质T恤上，让传统文化走进日常生活，彰显个性与文化内涵。</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">🧲</div>
+                <div class="product-info">
+                    <h3>活字冰箱贴</h3>
+                    <p>小巧精致的木活字冰箱贴，既实用又美观，为生活空间增添一抹文化气息。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 团队介绍 -->
+    <section class="team" id="team">
+        <h2 class="section-title">团队介绍</h2>
+        <div class="team-content">
+            <div class="team-label">团队<br>介绍</div>
+            <div class="team-description">
+                <p>
+                    我们是一支充满激情与创新精神的团队，由来自电气工程、设计、市场营销等不同专业背景的成员组成。团队负责人王铮带领团队成员张清岩、杨椿燕、蒋冬轩、王启明、陈光鉴、姜闻轩、帅无剑、黄丰裕、胡玉等，共同致力于非遗文化的传承与创新。
+                </p>
+                <p style="margin-top: 1rem;">
+                    我们深入研究木活字印刷技术的历史文化价值，结合现代设计理念和市场需求，开发出一系列兼具文化内涵与实用价值的文创产品。我们的目标是让更多人了解和喜爱这项传统工艺，让非遗文化在新时代焕发新的光彩。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-item">
+                <span>手机号：13681722199</span>
+            </div>
+            <div class="footer-item">
+                <span>邮箱：1735466100@qq.com</span>
+            </div>
+            <div class="footer-item">
+                <span>链接：古语新绎官方网站</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
